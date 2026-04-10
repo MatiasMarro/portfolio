@@ -1,28 +1,56 @@
-# WinXP
+# Matias Marro — Portfolio
 
-🏁 Web based Windows XP desktop recreation.
+Portfolio personal con temática Windows XP, construido con React.
 
-Features:
+**Live:** https://matiasmarro.github.io/portfolio/
 
-- Drag and resize, minimize, maximize windows
-- Open applications from desktop icons or start menu
-- Minesweeper, Internet Explorer, My Computer, Notepad, Winamp, Paint
-- Power off menu
+---
 
-## [Try it!](https://winxp.now.sh)
+## Sobre mí
 
-Windows XP 👉 https://winxp.now.sh
+**Full Stack Developer · Software Engineer**  
+Córdoba, Argentina
 
-[![](demo/demo.gif)](https://winxp.now.sh)
+- **Email:** m.m.caseros.386@gmail.com
+- **GitHub:** [MatiasMarro](https://github.com/MatiasMarro)
+- **LinkedIn:** [Matias-Marro](https://www.linkedin.com/in/Matias-Marro)
 
-## Contributing
+---
 
-Generally open an issue (or comment on an issue if there's one already) before starting work on a PR.
+## Stack
 
-## License
+JavaScript · React · Node.js · Angular · TypeScript · C# · ElectronJS · Python · C · CSS · TensorFlow · Keras · OpenCV
 
-The Windows XP name, artwork, trademark are surely property of Microsoft. This project is provided for educational purposes only. It is not affiliated with and has not been approved by Microsoft.
+---
 
-## Thanks
-- [Webamp](https://github.com/captbaritone/webamp), Winamp 2 reimplementation by: [captbaritone](https://github.com/captbaritone)
-- [JS Paint](https://github.com/1j01/jspaint), Paint reimplementation by: [1j01](https://github.com/1j01)
+## Apps del portfolio
+
+| App | Contenido |
+|-----|-----------|
+| **Internet Explorer** | Homepage con experiencia, proyectos y skills (4 secciones navegables) |
+| **Notepad** | CV completo en texto plano — editable |
+| **My Computer** | Links a GitHub y LinkedIn |
+| **Minesweeper** | Juego funcional |
+| **Paint** | Herramienta de dibujo |
+| **Winamp** | Reproductor de música |
+
+---
+
+## Correr local
+
+```bash
+npm install --legacy-peer-deps
+npm start
+```
+
+## Deploy a GitHub Pages
+
+```bash
+npm run deploy
+```
+
+Actualiza automáticamente https://matiasmarro.github.io/portfolio/
+
+---
+
+*Basado en [WinXP](https://github.com/ShizukuIchi/winXP) por ShizukuIchi — MIT License*
