@@ -132,7 +132,7 @@ function Main({ onSearch, className }) {
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/Matias-Marro"
+                href="https://www.linkedin.com/in/matias-marro-30344b194/"
                 target="_blank"
                 rel="noreferrer"
                 className="hero-link"

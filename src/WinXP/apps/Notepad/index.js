@@ -12,7 +12,7 @@ export default function Notepad({ onClose }) {
 Email    : m.m.caseros.386@gmail.com
 Teléfono : +54-3573-495499
 GitHub   : github.com/MatiasMarro
-LinkedIn : linkedin.com/in/Matias-Marro
+LinkedIn : linkedin.com/in/matias-marro-30344b194/
 Web      : MMportafolioweb.com
 
 ------------------------------------------------

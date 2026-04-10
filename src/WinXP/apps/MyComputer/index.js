@@ -252,7 +252,7 @@ function MyComputer({ onClose }) {
                     alt="linkedin"
                   />
                   <a
-                    href="https://www.linkedin.com/in/Matias-Marro"
+                    href="https://www.linkedin.com/in/matias-marro-30344b194/"
                     target="_blank"
                     rel="noreferrer"
                     className="com__content__left__card__text link"
@@ -350,21 +350,6 @@ function MyComputer({ onClose }) {
                     alt="github"
                   />
                   <div className="com__content__right__card__text">Github</div>
-                </a>
-                <a
-                  href="https://MMportafolioweb.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="com__content__right__card__item--me"
-                >
-                  <img
-                    className="com__content__right__card__img"
-                    src="https://cdn.iconscout.com/icon/free/png-256/portfolio-1495884-1267827.png"
-                    alt="portfolio"
-                  />
-                  <div className="com__content__right__card__text">
-                    My Portfolio
-                  </div>
                 </a>
               </div>
             </div>
