@@ -58,6 +58,9 @@ function Step3() {
   return (
     <FullScreen style={{ background: 'radial-gradient(29.68% 27.76% at 5.94% 14.64%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.16) 59.9%, rgba(255,255,255,0) 100%), #567DDA' }}>
       <Step3Header />
+      <Step3Center>
+        <LogoText>Matias Marro</LogoText>
+      </Step3Center>
       <Step3Footer />
     </FullScreen>
   );
@@ -83,7 +86,9 @@ function Login({ onLogin }) {
           </LoginCard>
         </LoginRight>
       </LoginBody>
-      <LoginFooter />
+      <LoginFooter>
+      <FooterHint>Después de iniciar sesión, puedes cambiar la configuración.</FooterHint>
+    </LoginFooter>
     </LoginScreen>
   );
 }
@@ -117,7 +122,7 @@ const Step2Content = styled.div`
 
 const LogoText = styled.h1`
   color: #fff;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
   font-size: 28px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -233,7 +238,7 @@ const LoginLeft = styled.div`
 const LoginTitle = styled.h1`
   color: #fff;
   font-size: 28px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 8px;
   text-align: right;
@@ -321,7 +326,7 @@ const Avatar = styled.div`
 const UserName = styled.div`
   color: #fff;
   font-size: 20px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
   font-weight: 400;
 `;
 
@@ -340,8 +345,24 @@ const LoginFooter = styled.div`
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 32px;
+`;
+
+const FooterHint = styled.p`
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-family: Tahoma, 'Noto Sans TC', sans-serif;
+  margin: 0;
+`;
+
+const Step3Center = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 `;
 
 export default Loader;
