@@ -10,7 +10,7 @@ import LogoSvg from './LogoSvg';
 // ────────────────────────────────────────────────────────────
 
 function Loader({ onLogin }) {
-  const [phase, setPhase] = useState('step1');
+  const [phase, setPhase] = useState('step2');
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('step2'), 2000);
@@ -29,12 +29,7 @@ function Loader({ onLogin }) {
   return <Login onLogin={onLogin} />;
 }
 
-// ─── Step 1: Black screen ────────────────────────────────────
-function Step1() {
-  return <FullScreen style={{ background: '#000' }} />;
-}
-
-// ─── Step 2: Black + logo + loading bar ─────────────────────
+// ─── Step 1: Black + logo + loading bar ─────────────────────
 function Step2() {
   return (
     <FullScreen style={{ background: '#000', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -74,21 +69,18 @@ function Login({ onLogin }) {
       <LoginHeader />
       <LoginBody>
         <LoginLeft>
-          <LoginTitle>Matias Marro</LoginTitle>
-          <LoginSubtitle>Full Stack Developer · Software Engineer</LoginSubtitle>
-          <LoginHint>Para comenzar, haz clic en tu nombre</LoginHint>
+          <LogoSvg />
         </LoginLeft>
         <LoginDivider />
         <LoginRight>
           <LoginCard onClick={onLogin}>
             <AvatarImg src={user} alt="avatar" />
             <UserName>Matias Marro</UserName>
-            <UserRole>Administrador</UserRole>
           </LoginCard>
         </LoginRight>
       </LoginBody>
       <LoginFooter>
-      <FooterHint>Después de iniciar sesión, puedes cambiar la configuración.</FooterHint>
+      <FooterHint>Una vez que iniciás sesión, podés explorar las carpetas de mi computadora. Andá al escritorio y hacé clic en la carpeta de proyectos; una vez que hagas click, vas a poder ver todos mis proyectos dentro del usuario.</FooterHint>
     </LoginFooter>
     </LoginScreen>
   );
@@ -119,6 +111,8 @@ const Step2Content = styled.div`
   align-items: center;
   flex: 1;
   justify-content: center;
+  gap: 20px;
+  width: 50vw;
 `;
 
 const LoadingBarWrapper = styled.div`
@@ -222,6 +216,7 @@ const LoginLeft = styled.div`
   flex-direction: column;
   align-items: flex-end;
   padding-right: 40px;
+  padding-bottom: 40px;
   @media (max-width: 600px) {
     display: none;
   }
@@ -302,7 +297,7 @@ const LoginCard = styled.div`
 const AvatarImg = styled.img`
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: .5rem;
   border: 2px solid #ffcc00;
   object-fit: cover;
   flex-shrink: 0;

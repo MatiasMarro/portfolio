@@ -219,17 +219,7 @@ function MyComputer({ onClose }) {
                 />
               </div>
               <div className="com__content__left__card__content">
-                <div className="com__content__left__card__row">
-                  <iframe
-                    title="ghbtn"
-                    style={{ margin: '0 0 3px -1px', height: '30px' }}
-                    src="https://ghbtns.com/github-btn.html?user=matias-marro-github&repo=winXP-master&type=star&count=true&size=large"
-                    frameBorder="0"
-                    scrolling="0"
-                    width="170px"
-                    height="20px"
-                  />
-                </div>
+                
                 <div className="com__content__left__card__row">
                   <img
                     className="com__content__left__card__img"
@@ -237,7 +227,7 @@ function MyComputer({ onClose }) {
                     alt="github"
                   />
                   <a
-                    href="https://github.com/matias-marro-github"
+                    href="https://github.com/MatiasMarro"
                     target="_blank"
                     rel="noreferrer"
                     className="com__content__left__card__text link"

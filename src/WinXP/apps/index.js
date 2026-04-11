@@ -67,27 +67,27 @@ export const defaultAppState = [
     id: genId(),
     zIndex: genIndex(),
   },
-  {
-    component: Winamp,
-    header: {
-      title: 'Winamp',
-      icon: winamp,
-      invisible: true,
-    },
-    defaultSize: {
-      width: 0,
-      height: 0,
-    },
-    defaultOffset: {
-      x: 0,
-      y: 0,
-    },
-    resizable: false,
-    minimized: false,
-    maximized: false,
-    id: genId(),
-    zIndex: genIndex(),
-  },
+  // {
+  //   component: Winamp,
+  //   header: {
+  //     title: 'Winamp',
+  //     icon: winamp,
+  //     invisible: true,
+  //   },
+  //   defaultSize: {
+  //     width: 0,
+  //     height: 0,
+  //   },
+  //   defaultOffset: {
+  //     x: 0,
+  //     y: 0,
+  //   },
+  //   resizable: false,
+  //   minimized: false,
+  //   maximized: false,
+  //   id: genId(),
+  //   zIndex: genIndex(),
+  // },
   {
     component: MyComputer,
     header: {
@@ -139,13 +139,13 @@ export const defaultIconState = [
     component: Notepad,
     isFocus: false,
   },
-  {
-    id: 4,
-    icon: winamp,
-    title: 'Winamp',
-    component: Winamp,
-    isFocus: false,
-  },
+  // {
+  //   id: 4,
+  //   icon: winamp,
+  //   title: 'Winamp',
+  //   component: Winamp,
+  //   isFocus: false,
+  // },
   {
     id: 5,
     icon: paintLarge,
@@ -253,26 +253,26 @@ export const appSettings = {
     maximized: window.innerWidth < 800,
     multiInstance: true,
   },
-  Winamp: {
-    header: {
-      icon: winamp,
-      title: 'Winamp',
-      invisible: true,
-    },
-    component: Winamp,
-    defaultSize: {
-      width: 0,
-      height: 0,
-    },
-    defaultOffset: {
-      x: 0,
-      y: 0,
-    },
-    resizable: false,
-    minimized: false,
-    maximized: false,
-    multiInstance: false,
-  },
+  // Winamp: {
+  //   header: {
+  //     icon: winamp,
+  //     title: 'Winamp',
+  //     invisible: true,
+  //   },
+  //   component: Winamp,
+  //   defaultSize: {
+  //     width: 0,
+  //     height: 0,
+  //   },
+  //   defaultOffset: {
+  //     x: 0,
+  //     y: 0,
+  //   },
+  //   resizable: false,
+  //   minimized: false,
+  //   maximized: false,
+  //   multiInstance: false,
+  // },
   Paint: {
     header: {
       icon: paint,
@@ -294,4 +294,5 @@ export const appSettings = {
   },
 };
 
-export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad, Winamp };
+// export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad, Winamp };
+export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad };
