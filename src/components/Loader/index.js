@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components';
-
+import styled, { keyframes } from 'styled-components';
+import user from 'assets/windowsIcons/user.png';
+import LogoSvg from './LogoSvg';
 // ─── Timings (ms) ───────────────────────────────────────────
 // step1: black screen           → 2 000 ms
 // step2: black + loading bar    → 4 000 ms
@@ -38,7 +39,7 @@ function Step2() {
   return (
     <FullScreen style={{ background: '#000', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Step2Content>
-        <LogoText>Matias Marro</LogoText>
+        <LogoSvg />
         <LoadingBarWrapper>
           <LoadingBox />
           <LoadingBox />
@@ -59,7 +60,7 @@ function Step3() {
     <FullScreen style={{ background: 'radial-gradient(29.68% 27.76% at 5.94% 14.64%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.16) 59.9%, rgba(255,255,255,0) 100%), #567DDA' }}>
       <Step3Header />
       <Step3Center>
-        <LogoText>Matias Marro</LogoText>
+        <LogoSvg />
       </Step3Center>
       <Step3Footer />
     </FullScreen>
@@ -80,7 +81,7 @@ function Login({ onLogin }) {
         <LoginDivider />
         <LoginRight>
           <LoginCard onClick={onLogin}>
-            <Avatar>MM</Avatar>
+            <AvatarImg src={user} alt="avatar" />
             <UserName>Matias Marro</UserName>
             <UserRole>Administrador</UserRole>
           </LoginCard>
@@ -118,15 +119,6 @@ const Step2Content = styled.div`
   align-items: center;
   flex: 1;
   justify-content: center;
-`;
-
-const LogoText = styled.h1`
-  color: #fff;
-  font-family: 'Franklin Gothic Medium', 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: 1px;
-  margin-bottom: 32px;
 `;
 
 const LoadingBarWrapper = styled.div`
@@ -307,19 +299,12 @@ const LoginCard = styled.div`
   }
 `;
 
-const Avatar = styled.div`
+const AvatarImg = styled.img`
   width: 56px;
   height: 56px;
   border-radius: 50%;
   border: 2px solid #ffcc00;
-  background: #1a3a8a;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 700;
-  font-family: Tahoma, sans-serif;
+  object-fit: cover;
   flex-shrink: 0;
 `;
 
