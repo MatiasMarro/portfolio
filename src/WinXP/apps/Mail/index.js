@@ -49,7 +49,7 @@ También podés explorar mis proyectos en la carpeta
 const VIEWS = { INBOX: 'inbox', COMPOSE: 'compose' };
 
 export default function Mail({ onClose }) {
-  const [view,            setView]      = useState(VIEWS.INBOX);
+  const [view,            setView]      = useState(VIEWS.COMPOSE);
   const [selectedFolder,  setFolder]    = useState('inbox');
   const [selectedMsg,     setMsg]       = useState(WELCOME_MSG);
   const [status,          setStatus]    = useState('idle'); // idle | sending | sent | error
