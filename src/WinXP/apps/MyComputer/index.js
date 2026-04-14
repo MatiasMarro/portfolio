@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { WindowDropDowns } from 'components';
@@ -23,10 +23,90 @@ import cd from 'assets/windowsIcons/111(48x48).png';
 import dropdown from 'assets/windowsIcons/dropdown.png';
 import pullup from 'assets/windowsIcons/pullup.png';
 import logo from 'assets/github-logo.png';
-import mine from 'assets/minesweeper/mine-icon.png';
 import windows from 'assets/windowsIcons/windows.png';
 
+const VIEWS = {
+  ROOT: null,
+  EDUCATION: 'education',
+  EXPERIENCE: 'experience',
+  PROJECTS: 'projects',
+  STACK: 'stack',
+};
+
+const VIEW_LABELS = {
+  education: 'Educación',
+  experience: 'Experiencia',
+  projects: 'Proyectos',
+  stack: 'Stack Técnico',
+};
+
+const GAME_PROJECTS = [
+  {
+    title: 'Space Invaders',
+    description: 'Juego arcade clásico de los 80s con implementación de sonido.',
+    tech: ['C++', 'Allegro'],
+    image: 'https://raw.githubusercontent.com/MatiasMarro/PortfolioWeb/main/assets/images/spaceInvaders.gif',
+    link: 'https://github.com/MatiasMarro/SpaceInvaders-Cpp',
+  },
+  {
+    title: 'Moon Landing',
+    description: 'Interfaz con importación de bitmaps y audio.',
+    tech: ['C/C++', 'Allegro'],
+    image: 'https://raw.githubusercontent.com/MatiasMarro/PortfolioWeb/main/assets/images/moonLanding.gif',
+    link: 'https://github.com/MatiasMarro/MOON-LANDING-GAME-',
+  },
+  {
+    title: 'Game Pong',
+    description: 'Pong clásico con oponente algorítmico.',
+    tech: ['C++'],
+    image: 'https://raw.githubusercontent.com/MatiasMarro/PortfolioWeb/main/assets/images/PONG.gif',
+    link: 'https://github.com/MatiasMarro/GAME-PONG-',
+  },
+  {
+    title: 'My First Game',
+    description: 'Primer proyecto de juego en C++, open source.',
+    tech: ['C++'],
+    image: 'https://raw.githubusercontent.com/MatiasMarro/PortfolioWeb/main/assets/images/FirstGame.gif',
+    link: 'https://github.com/MatiasMarro/Cpp-FirstGame-',
+  },
+];
+
+const PROFESSIONAL_PROJECTS = [
+  {
+    title: 'Reconocimiento Facial LFW',
+    description: 'MLP vs CNN sobre dataset Labeled Faces in the Wild. Data augmentation, matriz de confusión.',
+    tech: ['Python', 'TensorFlow', 'Keras', 'NumPy', 'Pandas'],
+    context: 'Deep Learning — UTN / UBA',
+  },
+  {
+    title: 'OpenCV — Visión por Computadora',
+    description: 'Clasificación de imágenes con CNN y aprendizaje automático.',
+    tech: ['Python', 'OpenCV'],
+    context: 'UTN FRC',
+  },
+  {
+    title: "Monitor de Carnes (McDonald's)",
+    description: 'Conteo de productos desde POS mediante lectura de puertos USB.',
+    tech: ['ElectronJS', 'Node.js', 'JSON', 'XML'],
+    context: 'FK TECH SRL',
+  },
+  {
+    title: "Monitor de Pedidos Delivery (McDonald's)",
+    description: 'Gestión de pedidos delivery con integración a dispositivos externos.',
+    tech: ['ElectronJS', 'Node.js', 'DLL/COM'],
+    context: 'FK TECH SRL',
+  },
+  {
+    title: 'Foreign Entry Order',
+    description: 'Windows Forms para emular ventas externas en sistema POS.',
+    tech: ['C#', 'Windows Forms'],
+    context: 'FK TECH SRL',
+  },
+];
+
 function MyComputer({ onClose }) {
+  const [view, setView] = useState(VIEWS.ROOT);
+
   function onClickOptionItem(item) {
     switch (item) {
       case 'Close':
@@ -35,19 +115,30 @@ function MyComputer({ onClose }) {
       default:
     }
   }
+
+  function goBack() {
+    setView(VIEWS.ROOT);
+  }
+
+  function openFolder(v) {
+    setView(v);
+  }
+
+  const addressText = view ? `My Computer > ${VIEW_LABELS[view]}` : 'My Computer';
+
   return (
     <Div>
       <section className="com__toolbar">
         <div className="com__options">
-          <WindowDropDowns
-            items={dropDownData}
-            onClickItem={onClickOptionItem}
-          />
+          <WindowDropDowns items={dropDownData} onClickItem={onClickOptionItem} />
         </div>
         <img className="com__windows-logo" src={windows} alt="windows" />
       </section>
       <section className="com__function_bar">
-        <div className="com__function_bar__button--disable">
+        <div
+          className={view ? 'com__function_bar__button' : 'com__function_bar__button--disable'}
+          onClick={view ? goBack : undefined}
+        >
           <img className="com__function_bar__icon" src={back} alt="" />
           <span className="com__function_bar__text">Back</span>
           <div className="com__function_bar__arrow" />
@@ -56,176 +147,116 @@ function MyComputer({ onClose }) {
           <img className="com__function_bar__icon" src={forward} alt="" />
           <div className="com__function_bar__arrow" />
         </div>
-        <div className="com__function_bar__button">
+        <div
+          className={view ? 'com__function_bar__button' : 'com__function_bar__button--disable'}
+          onClick={view ? goBack : undefined}
+        >
           <img className="com__function_bar__icon--normalize" src={up} alt="" />
         </div>
         <div className="com__function_bar__separate" />
         <div className="com__function_bar__button">
-          <img
-            className="com__function_bar__icon--normalize "
-            src={search}
-            alt=""
-          />
+          <img className="com__function_bar__icon--normalize " src={search} alt="" />
           <span className="com__function_bar__text">Search</span>
         </div>
         <div className="com__function_bar__button">
-          <img
-            className="com__function_bar__icon--normalize"
-            src={folderOpen}
-            alt=""
-          />
+          <img className="com__function_bar__icon--normalize" src={folderOpen} alt="" />
           <span className="com__function_bar__text">Folders</span>
         </div>
         <div className="com__function_bar__separate" />
         <div className="com__function_bar__button">
-          <img
-            className="com__function_bar__icon--margin12"
-            src={menu}
-            alt=""
-          />
+          <img className="com__function_bar__icon--margin12" src={menu} alt="" />
           <div className="com__function_bar__arrow" />
         </div>
       </section>
       <section className="com__address_bar">
         <div className="com__address_bar__title">Address</div>
         <div className="com__address_bar__content">
-          <img
-            src={computer}
-            alt="ie"
-            className="com__address_bar__content__img"
-          />
-          <div className="com__address_bar__content__text">My Computer</div>
-          <img
-            src={dropdown}
-            alt="dropdown"
-            className="com__address_bar__content__img"
-          />
+          <img src={computer} alt="ie" className="com__address_bar__content__img" />
+          <div className="com__address_bar__content__text">{addressText}</div>
+          <img src={dropdown} alt="dropdown" className="com__address_bar__content__img" />
         </div>
         <div className="com__address_bar__go">
           <img className="com__address_bar__go__img" src={go} alt="go" />
           <span className="com__address_bar__go__text">Go</span>
         </div>
       </section>
+
       <div className="com__content">
         <div className="com__content__inner">
+          {/* ── Left sidebar ── */}
           <div className="com__content__left">
+            {view === VIEWS.ROOT && (
+              <>
+                <div className="com__content__left__card">
+                  <div className="com__content__left__card__header">
+                    <div className="com__content__left__card__header__text">System Tasks</div>
+                    <img src={pullup} alt="" className="com__content__left__card__header__img" />
+                  </div>
+                  <div className="com__content__left__card__content">
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={viewInfo} alt="" />
+                      <div className="com__content__left__card__text link">View system information</div>
+                    </div>
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={remove} alt="" />
+                      <div className="com__content__left__card__text link">Add or remove programs</div>
+                    </div>
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={control} alt="" />
+                      <div className="com__content__left__card__text link">Change a setting</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="com__content__left__card">
+                  <div className="com__content__left__card__header">
+                    <div className="com__content__left__card__header__text">Other Places</div>
+                    <img src={pullup} alt="" className="com__content__left__card__header__img" />
+                  </div>
+                  <div className="com__content__left__card__content">
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={network} alt="" />
+                      <div className="com__content__left__card__text link">My Network Places</div>
+                    </div>
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={document} alt="" />
+                      <div className="com__content__left__card__text link">My Documents</div>
+                    </div>
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={folderSmall} alt="" />
+                      <div className="com__content__left__card__text link">Shared Documents</div>
+                    </div>
+                    <div className="com__content__left__card__row">
+                      <img className="com__content__left__card__img" src={control} alt="" />
+                      <div className="com__content__left__card__text link">Control Panel</div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {view !== VIEWS.ROOT && (
+              <div className="com__content__left__card">
+                <div className="com__content__left__card__header">
+                  <div className="com__content__left__card__header__text">File and Folder Tasks</div>
+                  <img src={pullup} alt="" className="com__content__left__card__header__img" />
+                </div>
+                <div className="com__content__left__card__content">
+                  <div className="com__content__left__card__row" onClick={goBack} style={{ cursor: 'pointer' }}>
+                    <img className="com__content__left__card__img" src={folderSmall} alt="" />
+                    <div className="com__content__left__card__text link">Back to My Computer</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="com__content__left__card">
               <div className="com__content__left__card__header">
-                <div className="com__content__left__card__header__text">
-                  System Tasks
-                </div>
-                <img
-                  src={pullup}
-                  alt=""
-                  className="com__content__left__card__header__img"
-                />
+                <div className="com__content__left__card__header__text">Details</div>
+                <img src={pullup} alt="" className="com__content__left__card__header__img" />
               </div>
               <div className="com__content__left__card__content">
                 <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={viewInfo}
-                    alt="view"
-                  />
-                  <div className="com__content__left__card__text link">
-                    View system information
-                  </div>
-                </div>
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={remove}
-                    alt="remove"
-                  />
-                  <div className="com__content__left__card__text link">
-                    Add or remove programs
-                  </div>
-                </div>
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={control}
-                    alt="control"
-                  />
-                  <div className="com__content__left__card__text link">
-                    Change a setting
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="com__content__left__card">
-              <div className="com__content__left__card__header">
-                <div className="com__content__left__card__header__text">
-                  Other Places
-                </div>
-                <img
-                  src={pullup}
-                  alt=""
-                  className="com__content__left__card__header__img"
-                />
-              </div>
-              <div className="com__content__left__card__content">
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={network}
-                    alt="network"
-                  />
-                  <div className="com__content__left__card__text link">
-                    My Network Places
-                  </div>
-                </div>
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={document}
-                    alt="document"
-                  />
-                  <div className="com__content__left__card__text link">
-                    My Documents
-                  </div>
-                </div>
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={folderSmall}
-                    alt="folder"
-                  />
-                  <div className="com__content__left__card__text link">
-                    Shared Documents
-                  </div>
-                </div>
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={control}
-                    alt="control"
-                  />
-                  <div className="com__content__left__card__text link">
-                    Control Panel
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="com__content__left__card">
-              <div className="com__content__left__card__header">
-                <div className="com__content__left__card__header__text">
-                  Details
-                </div>
-                <img
-                  src={pullup}
-                  alt=""
-                  className="com__content__left__card__header__img"
-                />
-              </div>
-              <div className="com__content__left__card__content">
-                
-                <div className="com__content__left__card__row">
-                  <img
-                    className="com__content__left__card__img"
-                    src={logo}
-                    alt="github"
-                  />
+                  <img className="com__content__left__card__img" src={logo} alt="github" />
                   <a
                     href="https://github.com/MatiasMarro"
                     target="_blank"
@@ -253,96 +284,196 @@ function MyComputer({ onClose }) {
               </div>
             </div>
           </div>
+
+          {/* ── Right content ── */}
           <div className="com__content__right">
-            <div className="com__content__right__card">
-              <div className="com__content__right__card__header">
-                Files Stored on This Computer
-              </div>
-              <div className="com__content__right__card__content">
-                <div className="com__content__right__card__item">
-                  <img
-                    src={folder}
-                    alt="folder"
-                    className="com__content__right__card__img"
-                  />
-                  <div className="com__content__right__card__img-container">
-                    <div className="com__content__right__card__text">
-                      Shared Documents
+
+            {/* ROOT VIEW */}
+            {view === VIEWS.ROOT && (
+              <>
+                <div className="com__content__right__card">
+                  <div className="com__content__right__card__header">Files Stored on This Computer</div>
+                  <div className="com__content__right__card__content">
+                    {[
+                      { label: 'Educación', v: VIEWS.EDUCATION },
+                      { label: 'Experiencia', v: VIEWS.EXPERIENCE },
+                      { label: 'Proyectos', v: VIEWS.PROJECTS },
+                      { label: 'Stack Técnico', v: VIEWS.STACK },
+                    ].map(({ label, v }) => (
+                      <div
+                        key={v}
+                        className="com__content__right__card__item folder-item"
+                        onDoubleClick={() => openFolder(v)}
+                      >
+                        <img src={folder} alt="folder" className="com__content__right__card__img" />
+                        <div className="com__content__right__card__text">{label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="com__content__right__card">
+                  <div className="com__content__right__card__header">Hard Disk Drives</div>
+                  <div className="com__content__right__card__content">
+                    <div className="com__content__right__card__item">
+                      <img src={disk} alt="disk" className="com__content__right__card__img" />
+                      <div className="com__content__right__card__text">Local Disk (C:)</div>
                     </div>
                   </div>
                 </div>
-                <div className="com__content__right__card__item">
-                  <img
-                    src={folder}
-                    alt="folder"
-                    className="com__content__right__card__img"
-                  />
-                  <div className="com__content__right__card__img-container">
-                    <div className="com__content__right__card__text">
-                      User's Documents
+                <div className="com__content__right__card">
+                  <div className="com__content__right__card__header">Devices with Removable Storage</div>
+                  <div className="com__content__right__card__content">
+                    <div className="com__content__right__card__item">
+                      <img src={cd} alt="cd" className="com__content__right__card__img" />
+                      <div className="com__content__right__card__text">CD Drive (D:)</div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="com__content__right__card">
-              <div className="com__content__right__card__header">
-                Hard Disk Drives
-              </div>
-              <div className="com__content__right__card__content">
-                <div className="com__content__right__card__item">
-                  <img
-                    src={disk}
-                    alt="disk"
-                    className="com__content__right__card__img"
-                  />
-                  <div className="com__content__right__card__img-container">
-                    <div className="com__content__right__card__text">
-                      Local Disk (C:)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="com__content__right__card">
-              <div className="com__content__right__card__header">
-                Devices with Removable Storage
-              </div>
-              <div className="com__content__right__card__content">
-                <div className="com__content__right__card__item">
-                  <div className="com__content__right__card__img-container">
-                    <img
-                      src={cd}
-                      alt="cd"
-                      className="com__content__right__card__img"
-                    />
-                  </div>
-                  <div className="com__content__right__card__text">
-                    CD Drive (D:)
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="com__content__right__card com__content__right__card--me">
-              <div className="com__content__right__card__header">
-                About Me :)
-              </div>
-              <div className="com__content__right__card__content">
-                <a
-                  href="https://github.com/matias-marro-github"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="com__content__right__card__item--me"
-                >
-                  <img
-                    className="com__content__right__card__img"
-                    src={logo}
-                    alt="github"
-                  />
-                  <div className="com__content__right__card__text">Github</div>
-                </a>
-              </div>
-            </div>
+              </>
+            )}
+
+            {/* EDUCATION VIEW */}
+            {view === VIEWS.EDUCATION && (
+              <FolderView>
+                <FolderViewTitle>Educación</FolderViewTitle>
+                <EduCard>
+                  <EduYear>2016 — Actualidad</EduYear>
+                  <EduDegree>Ingeniería Electrónica</EduDegree>
+                  <EduSchool>Universidad Tecnológica Nacional — Córdoba</EduSchool>
+                </EduCard>
+                <EduCard>
+                  <EduYear>2010 — 2015</EduYear>
+                  <EduDegree>Bachiller en Economía y Gestión</EduDegree>
+                  <EduSchool>Inst. Sec. Dr. Raúl Loza Luque — Luque, Córdoba</EduSchool>
+                </EduCard>
+              </FolderView>
+            )}
+
+            {/* EXPERIENCE VIEW */}
+            {view === VIEWS.EXPERIENCE && (
+              <FolderView>
+                <FolderViewTitle>Experiencia Profesional</FolderViewTitle>
+                {[
+                  {
+                    company: 'Leistung Ingeniería SRL',
+                    period: 'Sept 2024 — Actualidad',
+                    role: 'Freelance Full Stack Developer',
+                    location: 'Córdoba, Argentina',
+                    items: [
+                      'Desarrollo web con Angular, TypeScript y C#',
+                      'Implementación de diseños basados en Figma',
+                      'Gestión de proyectos con Jira',
+                    ],
+                  },
+                  {
+                    company: 'FK TECH SRL',
+                    period: 'Mar 2022 — Sept 2024',
+                    role: 'Software Engineer',
+                    location: 'Córdoba, Argentina',
+                    items: [
+                      'Backend para sistemas POS (Point Of Sales)',
+                      'APIs en múltiples lenguajes y plataformas',
+                      'JavaScript, C, ElectronJS, Node.js, React, CSS',
+                      'Herramientas Atlassian: Jira y Confluence',
+                    ],
+                  },
+                  {
+                    company: 'M&M Digital Factory',
+                    period: 'Ene 2015 — Mar 2022',
+                    role: 'Diseño y Carpintería',
+                    location: 'Luque, Córdoba',
+                    items: [
+                      'Diseño de muebles con CAD Fusion 360',
+                      'Operación de máquinas CNC',
+                    ],
+                  },
+                ].map((job, i) => (
+                  <ExpCard key={i}>
+                    <ExpHeader>
+                      <ExpCompany>{job.company}</ExpCompany>
+                      <ExpPeriod>{job.period}</ExpPeriod>
+                    </ExpHeader>
+                    <ExpRole>{job.role} — {job.location}</ExpRole>
+                    <ExpList>
+                      {job.items.map((item, j) => <li key={j}>{item}</li>)}
+                    </ExpList>
+                  </ExpCard>
+                ))}
+              </FolderView>
+            )}
+
+            {/* PROJECTS VIEW */}
+            {view === VIEWS.PROJECTS && (
+              <FolderView>
+                <FolderViewTitle>Proyectos</FolderViewTitle>
+                <ProjectSectionLabel>Juegos (C / C++)</ProjectSectionLabel>
+                <ProjectsGrid>
+                  {GAME_PROJECTS.map((p, i) => (
+                    <ProjectCard key={i}>
+                      <ProjectImg src={p.image} alt={p.title} />
+                      <ProjectInfo>
+                        <ProjectTitle>{p.title}</ProjectTitle>
+                        <ProjectDesc>{p.description}</ProjectDesc>
+                        <TechRow>
+                          {p.tech.map(t => <TechTag key={t}>{t}</TechTag>)}
+                        </TechRow>
+                        {p.link && (
+                          <ProjectLink href={p.link} target="_blank" rel="noreferrer">
+                            Ver en GitHub
+                          </ProjectLink>
+                        )}
+                      </ProjectInfo>
+                    </ProjectCard>
+                  ))}
+                </ProjectsGrid>
+                <ProjectSectionLabel style={{ marginTop: 16 }}>Proyectos Profesionales</ProjectSectionLabel>
+                <ProProjectsGrid>
+                  {PROFESSIONAL_PROJECTS.map((p, i) => (
+                    <ProProjectCard key={i}>
+                      <ProProjectTitle>{p.title}</ProProjectTitle>
+                      <ProProjectContext>{p.context}</ProProjectContext>
+                      <ProProjectDesc>{p.description}</ProProjectDesc>
+                      <TechRow>
+                        {p.tech.map(t => <TechTag key={t}>{t}</TechTag>)}
+                      </TechRow>
+                    </ProProjectCard>
+                  ))}
+                </ProProjectsGrid>
+              </FolderView>
+            )}
+
+            {/* STACK VIEW */}
+            {view === VIEWS.STACK && (
+              <FolderView>
+                <FolderViewTitle>Stack Técnico</FolderViewTitle>
+                {[
+                  {
+                    category: 'Frontend',
+                    items: ['JavaScript', 'React', 'Angular', 'TypeScript', 'CSS'],
+                  },
+                  {
+                    category: 'Backend',
+                    items: ['Node.js', 'C#', 'C / C++', 'ElectronJS', 'Python'],
+                  },
+                  {
+                    category: 'AI / Machine Learning',
+                    items: ['TensorFlow', 'Keras', 'OpenCV', 'NumPy', 'Pandas', 'Matplotlib'],
+                  },
+                  {
+                    category: 'Tools & Platforms',
+                    items: ['Jira', 'Confluence', 'Figma', 'Git', 'POSTMAN'],
+                  },
+                ].map((section, i) => (
+                  <StackSection key={i}>
+                    <StackCategory>{section.category}</StackCategory>
+                    <StackTags>
+                      {section.items.map(item => <StackTag key={item}>{item}</StackTag>)}
+                    </StackTags>
+                  </StackSection>
+                ))}
+              </FolderView>
+            )}
+
           </div>
         </div>
       </div>
@@ -350,6 +481,227 @@ function MyComputer({ onClose }) {
   );
 }
 
+/* ─── Folder View Shared ─── */
+const FolderView = styled.div`
+  padding: 16px 20px;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+`;
+
+const FolderViewTitle = styled.div`
+  font-weight: 700;
+  font-size: 13px;
+  color: #0c327d;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #70bfff;
+`;
+
+/* ─── Education ─── */
+const EduCard = styled.div`
+  background: #f5f8ff;
+  border: 1px solid #c0d0f8;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+`;
+const EduYear = styled.div`
+  font-size: 10px;
+  color: #666;
+  font-family: Tahoma, sans-serif;
+`;
+const EduDegree = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: #0c327d;
+  margin: 2px 0;
+`;
+const EduSchool = styled.div`
+  font-size: 11px;
+  color: #333;
+`;
+
+/* ─── Experience ─── */
+const ExpCard = styled.div`
+  background: #f5f8ff;
+  border: 1px solid #c0d0f8;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+`;
+const ExpHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+`;
+const ExpCompany = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: #0c327d;
+`;
+const ExpPeriod = styled.div`
+  font-size: 10px;
+  color: #666;
+`;
+const ExpRole = styled.div`
+  font-size: 11px;
+  color: #444;
+  margin-bottom: 4px;
+`;
+const ExpList = styled.ul`
+  margin: 0;
+  padding-left: 16px;
+  font-size: 10px;
+  color: #333;
+  line-height: 1.6;
+`;
+
+/* ─── Projects ─── */
+const ProjectSectionLabel = styled.div`
+  font-size: 11px;
+  font-weight: 700;
+  color: #0c327d;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const ProjectsGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ProjectCard = styled.div`
+  display: flex;
+  gap: 12px;
+  background: #f5f8ff;
+  border: 1px solid #c0d0f8;
+  border-radius: 3px;
+  padding: 8px;
+  align-items: flex-start;
+`;
+
+const ProjectImg = styled.img`
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: #000;
+`;
+
+const ProjectInfo = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const ProjectTitle = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: #0c327d;
+  margin-bottom: 2px;
+`;
+
+const ProjectDesc = styled.div`
+  font-size: 10px;
+  color: #444;
+  margin-bottom: 5px;
+  line-height: 1.4;
+`;
+
+const TechRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 5px;
+`;
+
+const TechTag = styled.span`
+  background: #dce8ff;
+  border: 1px solid #a0b8f0;
+  border-radius: 2px;
+  padding: 1px 5px;
+  font-size: 9px;
+  color: #0c327d;
+`;
+
+const ProjectLink = styled.a`
+  font-size: 10px;
+  color: #1a5cd8;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ProProjectsGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+const ProProjectCard = styled.div`
+  background: #f5f8ff;
+  border: 1px solid #c0d0f8;
+  border-radius: 3px;
+  padding: 8px 10px;
+  width: 200px;
+  flex-shrink: 0;
+`;
+
+const ProProjectTitle = styled.div`
+  font-size: 11px;
+  font-weight: 700;
+  color: #0c327d;
+  margin-bottom: 2px;
+`;
+
+const ProProjectContext = styled.div`
+  font-size: 9px;
+  color: #888;
+  margin-bottom: 3px;
+  font-style: italic;
+`;
+
+const ProProjectDesc = styled.div`
+  font-size: 10px;
+  color: #444;
+  margin-bottom: 5px;
+  line-height: 1.4;
+`;
+
+/* ─── Stack ─── */
+const StackSection = styled.div`
+  margin-bottom: 14px;
+`;
+
+const StackCategory = styled.div`
+  font-size: 11px;
+  font-weight: 700;
+  color: #0c327d;
+  margin-bottom: 5px;
+`;
+
+const StackTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+`;
+
+const StackTag = styled.span`
+  background: #dce8ff;
+  border: 1px solid #a0b8f0;
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-size: 10px;
+  color: #0c327d;
+`;
+
+/* ─── Main container ─── */
 const Div = styled.div`
   height: 100%;
   width: 100%;
@@ -395,6 +747,7 @@ const Div = styled.div`
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 3px;
+    cursor: pointer;
     &:hover {
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.1);
@@ -458,19 +811,6 @@ const Div = styled.div`
       border-style: solid;
     }
   }
-  .com__function_bar__arrow--margin-11 {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    margin: 0 1px 0 -1px;
-    &:before {
-      content: '';
-      display: block;
-      border-width: 3px 3px 0;
-      border-color: #000 transparent;
-      border-style: solid;
-    }
-  }
   .com__address_bar {
     flex-shrink: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.7);
@@ -515,7 +855,6 @@ const Div = styled.div`
       right: 17px;
     }
   }
-
   .com__address_bar__go {
     display: flex;
     align-items: center;
@@ -527,29 +866,6 @@ const Div = styled.div`
       border: 1px solid rgba(255, 255, 255, 0.2);
       margin-right: 3px;
     }
-  }
-  .com__address_bar__links {
-    display: flex;
-    align-items: center;
-    padding: 0 18px 0 5px;
-    height: 100%;
-    position: relative;
-    &__img {
-      position: absolute;
-      right: 2px;
-      top: 3px;
-      height: 5px;
-      width: 8px;
-    }
-    &__text {
-      color: rgba(0, 0, 0, 0.5);
-    }
-  }
-  .com__address_bar__separate {
-    height: 100%;
-    width: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 1px 0 rgba(255, 255, 255, 0.7);
   }
   .com__content {
     flex: 1;
@@ -567,12 +883,12 @@ const Div = styled.div`
   }
   .com__content__left {
     width: 180px;
+    min-width: 180px;
     height: 100%;
     background: linear-gradient(to bottom, #748aff 0%, #4057d3 100%);
     overflow: auto;
     padding: 10px;
   }
-
   .com__content__left__card {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -625,7 +941,6 @@ const Div = styled.div`
     display: flex;
     margin-bottom: 2px;
   }
-
   .com__content__left__card__img {
     width: 14px;
     height: 14px;
@@ -641,7 +956,6 @@ const Div = styled.div`
     &.bold {
       font-weight: bold;
     }
-
     &.link:hover {
       cursor: pointer;
       color: #2b72ff;
@@ -673,7 +987,6 @@ const Div = styled.div`
   .com__content__right__card__content {
     display: flex;
     align-items: center;
-    padding-right: 0;
     flex-wrap: wrap;
     padding: 15px 15px 0;
   }
@@ -684,45 +997,42 @@ const Div = styled.div`
     margin-bottom: 15px;
     height: auto;
   }
+  .folder-item {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    text-align: center;
+    &:hover {
+      background: rgba(0, 100, 255, 0.08);
+      border-color: rgba(0, 100, 255, 0.2);
+    }
+    &:active {
+      background: rgba(0, 100, 255, 0.15);
+    }
+  }
   .com__content__right__card__img {
     width: 45px;
     height: 45px;
     margin-right: 5px;
   }
+  .folder-item .com__content__right__card__img {
+    margin-right: 0;
+    margin-bottom: 4px;
+  }
   .com__content__right__card__text {
     white-space: nowrap;
     height: 100%;
   }
-  .com__content__right__card--me {
-    .com__content__right__card__header:after,
-    .com__content__right__card__header {
-      transition: 0.4s;
-    }
-    &:hover {
-      .com__content__right__card__header:after {
-        width: 0;
-      }
-      .com__content__right__card__header {
-        transform: scale(1.2) translate(20px, 5px);
-      }
-    }
-  }
-  .com__content__right__card__item--me {
-    display: flex;
-    align-items: center;
-    width: 200px;
-    margin-bottom: 15px;
-    height: auto;
-    & > * {
-      transition: transform 0.2s;
-    }
-    &:hover .com__content__right__card__img {
-      transform: rotate(-10deg) scale(0.9);
-    }
-    &:hover .com__content__right__card__text {
-      transform: scale(1.2);
-      transition-timing-function: cubic-bezier(0.23, 1.93, 0.59, -0.15);
-    }
+  .folder-item .com__content__right__card__text {
+    white-space: normal;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.3;
   }
 `;
 
