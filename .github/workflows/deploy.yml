@@ -37,6 +37,7 @@ jobs:
         run: npm run build
         env:
           DISABLE_ESLINT_PLUGIN: true
+          REACT_APP_FORMSPREE_ID: ${{ secrets.REACT_APP_FORMSPREE_ID }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

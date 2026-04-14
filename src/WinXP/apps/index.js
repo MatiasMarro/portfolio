@@ -5,8 +5,10 @@ import MyComputer from './MyComputer';
 import Notepad from './Notepad';
 import Winamp from './Winamp';
 import Paint from './Paint';
+import Mail from './Mail';
 import iePaper from 'assets/windowsIcons/ie-paper.png';
 import ie from 'assets/windowsIcons/ie.png';
+import outlookExpress from 'assets/windowsIcons/outlook-express.svg';
 import mine from 'assets/minesweeper/mine-icon.png';
 import error from 'assets/windowsIcons/897(16x16).png';
 import computer from 'assets/windowsIcons/676(16x16).png';
@@ -153,6 +155,13 @@ export const defaultIconState = [
     component: Paint,
     isFocus: false,
   },
+  {
+    id: 6,
+    icon: outlookExpress,
+    title: 'Outlook Express',
+    component: Mail,
+    isFocus: false,
+  },
 ];
 
 export const appSettings = {
@@ -273,6 +282,25 @@ export const appSettings = {
   //   maximized: false,
   //   multiInstance: false,
   // },
+  'Outlook Express': {
+    header: {
+      icon: outlookExpress,
+      title: 'Outlook Express',
+    },
+    component: Mail,
+    defaultSize: {
+      width: 680,
+      height: 480,
+    },
+    defaultOffset: {
+      x: 160,
+      y: 40,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: window.innerWidth < 800,
+    multiInstance: false,
+  },
   Paint: {
     header: {
       icon: paint,
@@ -295,4 +323,4 @@ export const appSettings = {
 };
 
 // export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad, Winamp };
-export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad };
+export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad, Mail };
