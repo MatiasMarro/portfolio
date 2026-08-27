@@ -7,86 +7,171 @@ import dropDownData from './dropDownData';
 export default function Notepad({ onClose }) {
   const [docText, setDocText] = useState(
 `================================================
-  MATIAS MARRO — Curriculum Vitae
+  MATÍAS MARRO — Curriculum Vitae
+  AI Engineer & Full Stack Developer
 ================================================
-Email    : m.m.caseros.386@gmail.com
-Teléfono : +54-3573-495499
-GitHub   : github.com/MatiasMarro
-LinkedIn : linkedin.com/in/matias-marro-30344b194/
-Web      : MMportafolioweb.com
+Email       : m.m.caseros.386@gmail.com
+Teléfono    : +54 3573 495499
+Ubicación   : Córdoba, Argentina — Remoto
+GitHub      : github.com/MatiasMarro
+LinkedIn    : linkedin.com/in/matias-marro-30344b194/
+Hugging Face: huggingface.co/MatiasMarro
+Portfolio   : matiasmarro.github.io/portfolio/
 
 ------------------------------------------------
-  EDUCACIÓN
+  PERFIL PROFESIONAL
 ------------------------------------------------
-Ingeniería Electrónica (2016 – Actualidad)
-  Universidad Tecnológica Nacional — Córdoba
+Ingeniero de software con más de 4 años de experiencia
+full stack (Angular, React, Node.js, C# / .NET) y
+especialización aplicada en Inteligencia Artificial
+(LLMs, RAG, fine-tuning con LoRA, deep learning).
 
-Bachiller en Economía y Gestión (2010 – 2015)
-  Inst. Sec. Dr. Raúl Loza Luque — Luque, Córdoba
+Mi diferencial es cerrar todo el ciclo: entreno o integro
+un modelo, lo despliego como API y lo conecto a una
+aplicación real que la gente usa. Vengo de construir
+sistemas en producción (POS desplegados en locales, apps
+de gestión empresarial) y hoy aplico esa misma mentalidad
+de "que funcione y se pueda mantener" a los proyectos de IA.
+
+------------------------------------------------
+  TECNOLOGÍAS
+------------------------------------------------
+IA & GenAI     : Fine-tuning LoRA / PEFT, RAG, LangChain
+                 (LCEL), LangServe, Hugging Face, OpenAI
+                 API, ChromaDB, prompt engineering,
+                 evaluación de LLMs
+
+ML / Deep      : PyTorch, TensorFlow, Keras, Scikit-learn,
+Learning         XGBoost, CNN, transfer learning, visión
+                 por computadora, CLIP
+
+Frontend       : Angular, React, TypeScript, JavaScript,
+                 HTML5, CSS3, Figma
+
+Backend & APIs : Node.js, C# / .NET, FastAPI, ElectronJS,
+                 REST APIs, SQL, C
+
+DevOps & Datos : Docker, CI/CD (GitHub Actions), Git,
+                 Railway, Hugging Face Spaces, Pandas,
+                 NumPy, Jira
+
+------------------------------------------------
+  PROYECTOS DESTACADOS — IA / MACHINE LEARNING
+------------------------------------------------
+Fine-tuning LoRA para Salida Estructurada
+API en producción
+  PyTorch · PEFT · Transformers · FastAPI · Docker
+  > Fine-tuning con LoRA sobre Qwen2.5-0.5B para que un
+    asistente de soporte devolviera siempre salida
+    estructurada.
+  > Precisión de formato: 0% (modelo base) -> 87%,
+    superando al few-shot prompting (55%) con mucho
+    menos consumo de tokens.
+  > Partición de datos sin fuga entre train y test, con
+    un producto entero fuera del entrenamiento para
+    observar cómo generalizaba a casos no vistos.
+  > Desplegado como API con FastAPI + Docker en
+    Hugging Face Spaces.
+  Demo: huggingface.co/spaces/MatiasMarro/nimbus-lora-format-tuning
+
+Chatbot RAG sobre documentación corporativa
+Despliegue en producción
+  FastAPI · LangChain · ChromaDB · OpenAI · Railway
+  > Indexación de web + PDFs en ChromaDB y generación
+    con gpt-4o-mini.
+  > Prompt diseñado para no alucinar (respuesta fija
+    cuando la información no está), verificado con tests.
+  > Expuesto con FastAPI + LangServe y streaming,
+    desplegado en Railway.
+  App : promtior-rag-challenge-production.up.railway.app
+  Repo: github.com/MatiasMarro/promptior-rag-challenge
+
+Predicción de Churn & Visión por Computadora
+  Scikit-learn · XGBoost · TensorFlow · PyTorch
+  > Predicción de churn sobre dataset desbalanceado con
+    validación cruzada estratificada (AUC-ROC = 0.84).
+  > Segmentación semántica de escenas urbanas con FCN-8
+    (~85% accuracy).
+  > Búsqueda de imágenes por texto con CLIP.
+  Repo: github.com/MatiasMarro/Deep-Learning
 
 ------------------------------------------------
   EXPERIENCIA PROFESIONAL
 ------------------------------------------------
-Leistung Ingeniería SRL (Sept 2024 – Actualidad)
-  Freelance Full Stack Developer — Córdoba, Argentina
-  > Desarrollo web con Angular, TypeScript y C#
-  > Implementación de diseños basados en Figma
-  > Gestión de proyectos con Jira
-  > Coordinación con equipo para entrega de calidad
+Leistung Ingeniería SRL (Sept 2024 – Presente)
+  Full Stack Developer (Freelance) — Córdoba, Argentina
+  > Aplicación web de gestión empresarial: Angular +
+    TypeScript en el frontend, C# / .NET en el backend.
+  > Traducción de diseños Figma a interfaz final.
+  > Coordinación directa con el cliente vía Jira.
 
-FK TECH SRL (Mar 2022 – Sept 2024)
+FK Tech SRL — Cliente: McDonald's Corporation
+(Mar 2022 – Sept 2024)
   Software Engineer — Córdoba, Argentina
-  > Backend para sistemas POS (Point Of Sales)
-  > APIs en múltiples lenguajes y plataformas
-  > JavaScript, C, ElectronJS, Node.js, React, CSS
-  > Herramientas Atlassian: Jira y Confluence
-  > Soporte técnico y resolución de incidencias
+  > Apps de escritorio y servicios para los sistemas POS
+    desplegados en locales de McDonald's, con ElectronJS,
+    Node.js, React y C.
+  > Integración con hardware del local (USB, DLLs nativas,
+    comunicación COM) y construcción de APIs REST.
+  > Apps productivas entregadas: conteo automatizado de
+    productos, monitor de delivery en tiempo real e
+    interfaz de carga de ventas externas.
+  > Documentación técnica en Confluence y seguimiento de
+    sprints en Jira.
 
 M&M Digital Factory (Ene 2015 – Mar 2022)
   Diseño y Carpintería — Luque, Córdoba
-  > Diseño de muebles con CAD Fusion 360
-  > Operación de máquinas CNC
+  > Diseño de muebles con software CAD Fusion 360.
+  > Operación de máquinas CNC.
 
 ------------------------------------------------
-  PROYECTOS
+  OTROS PROYECTOS
 ------------------------------------------------
-Reconocimiento facial LFW: MLP vs CNN
-  Deep Learning — UTN UBA
-  > MLP vs CNN sobre dataset Labeled Faces in the Wild
-  > Data augmentation, matriz de confusión
-  > TensorFlow, Keras, NumPy, Pandas, Matplotlib
+Monitor de Recuento de Carnes (McDonald's — FK Tech)
+  > ElectronJS + Node.js para conteo de productos desde
+    el POS, con lectura de puertos USB.
 
-OpenCV — Visión por Computadora
-  UTN FRC
-  > Clasificación de imágenes con CNN
-  > Python, OpenCV, aprendizaje automático
+Monitor de Pedidos de Delivery (McDonald's — FK Tech)
+  > Monitor en tiempo real con integración a dispositivos
+    externos del local (DLL / COM).
 
-Monitor de Recuento de Carnes (McDonald's — FKTECH)
-  > ElectronJS para conteo de productos desde POS
-  > Node.js, JSON, XML, lectura de puertos USB
+Foreign Entry Order (McDonald's — FK Tech)
+  > Windows Forms para carga de ventas externas en el POS.
 
-Monitor de Pedidos de Delivery (McDonald's — FKTECH)
-  > Gestión de pedidos delivery con ElectronJS
-  > Integración con dispositivos externos (DLL/COM)
+Reconocimiento facial LFW: MLP vs CNN (UTN / UBA)
+  > Comparación MLP vs CNN sobre Labeled Faces in the
+    Wild, con data augmentation y matriz de confusión.
 
-Foreign Entry Order (McDonald's — FKTECH)
-  > Windows Forms para emular ventas externas en POS
+OpenCV — Visión por Computadora (UTN FRC)
+  > Clasificación de imágenes con redes convolucionales.
 
-------------------------------------------------
-  STACK TÉCNICO
-------------------------------------------------
-Frontend : JavaScript, React, Angular, TypeScript, CSS
-Backend  : Node.js, C#, C, ElectronJS, Python
-AI / ML  : TensorFlow, Keras, OpenCV, NumPy, Pandas
-Tools    : Jira, Confluence, Figma, Git, POSTMAN
+Juegos en C / C++ con Allegro
+  > Space Invaders, Moon Landing, Pong y My First Game.
+  > github.com/MatiasMarro
 
 ------------------------------------------------
-  HABILIDADES
+  EDUCACIÓN Y CERTIFICACIONES
 ------------------------------------------------
-> Análisis de requerimientos y estimación de tiempos
-> Jira y Confluence para seguimiento de proyectos
-> Inglés avanzado — comunicación en entornos internacionales
-> Aprendizaje rápido · Adaptabilidad a nuevos entornos
+Ingeniería Electrónica (estudiante avanzado)
+  Universidad Tecnológica Nacional — FRC, Córdoba
+  > Formación orientada a visión por computadora y
+    deep learning.
+
+Bachiller en Economía y Gestión (2010 – 2015)
+  Inst. Sec. Dr. Raúl Loza Luque — Luque, Córdoba
+
+Curso de Deep Learning — UTN / BA
+  validator.centrodeelearning.com/validator/VzfVf7OLmX
+
+Curso de Machine Learning — UTN / BA
+  validator.centrodeelearning.com/validator/nXd7S7gU8g
+
+------------------------------------------------
+  IDIOMAS
+------------------------------------------------
+Español : Nativo
+Inglés  : Avanzado — lectura técnica, documentación y
+          comunicación profesional
 
 ================================================
 `);

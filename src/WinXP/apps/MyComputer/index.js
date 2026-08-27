@@ -27,17 +27,19 @@ import windows from 'assets/windowsIcons/windows.png';
 
 const VIEWS = {
   ROOT: null,
-  EDUCATION: 'education',
+  AI: 'ai',
   EXPERIENCE: 'experience',
   PROJECTS: 'projects',
   STACK: 'stack',
+  EDUCATION: 'education',
 };
 
 const VIEW_LABELS = {
-  education: 'Educación',
+  ai: 'IA / Machine Learning',
   experience: 'Experiencia',
   projects: 'Proyectos',
   stack: 'Stack Técnico',
+  education: 'Educación',
 };
 
 const GAME_PROJECTS = [
@@ -71,36 +73,106 @@ const GAME_PROJECTS = [
   },
 ];
 
+const AI_PROJECTS = [
+  {
+    title: 'Fine-tuning LoRA para Salida Estructurada',
+    context: 'API en producción — Hugging Face Spaces',
+    metric: 'Precisión de formato: 0% → 87%',
+    description:
+      'Fine-tuning con LoRA sobre Qwen2.5-0.5B para que un asistente de soporte devuelva siempre salida estructurada. Superó al few-shot prompting (55%) con mucho menos consumo de tokens. Partición de datos sin fuga entre train y test, dejando un producto entero fuera del entrenamiento para medir cómo generalizaba a casos no vistos.',
+    tech: ['PyTorch', 'PEFT', 'Transformers', 'FastAPI', 'Docker'],
+    links: [
+      {
+        label: 'Demo',
+        url:
+          'https://huggingface.co/spaces/MatiasMarro/nimbus-lora-format-tuning',
+      },
+      {
+        label: 'Código',
+        url:
+          'https://huggingface.co/spaces/MatiasMarro/nimbus-lora-format-tuning/tree/main',
+      },
+    ],
+  },
+  {
+    title: 'Chatbot RAG sobre documentación corporativa',
+    context: 'Despliegue en producción — Railway',
+    metric: 'Prompt anti-alucinación verificado con tests',
+    description:
+      'Indexación de web y PDFs en ChromaDB, con generación vía gpt-4o-mini. El prompt está diseñado para no alucinar: devuelve una respuesta fija cuando la información no está en el corpus. Expuesto con FastAPI + LangServe y streaming.',
+    tech: ['FastAPI', 'LangChain', 'LangServe', 'ChromaDB', 'OpenAI'],
+    links: [
+      {
+        label: 'App',
+        url: 'https://promtior-rag-challenge-production.up.railway.app/',
+      },
+      {
+        label: 'Código',
+        url: 'https://github.com/MatiasMarro/promptior-rag-challenge',
+      },
+    ],
+  },
+  {
+    title: 'Predicción de Churn & Visión por Computadora',
+    context: 'Machine Learning y Deep Learning',
+    metric: 'AUC-ROC 0.84 · FCN-8 ~85% accuracy',
+    description:
+      'Predicción de churn sobre un dataset desbalanceado con validación cruzada estratificada; segmentación semántica de escenas urbanas con FCN-8; y búsqueda de imágenes por texto con CLIP.',
+    tech: ['Scikit-learn', 'XGBoost', 'TensorFlow', 'PyTorch', 'CLIP'],
+    links: [
+      { label: 'Código', url: 'https://github.com/MatiasMarro/Deep-Learning' },
+    ],
+  },
+];
+
+const CERTIFICATIONS = [
+  {
+    name: 'Curso de Deep Learning',
+    school: 'UTN / BA',
+    url: 'https://validator.centrodeelearning.com/validator/VzfVf7OLmX',
+  },
+  {
+    name: 'Curso de Machine Learning',
+    school: 'UTN / BA',
+    url: 'https://validator.centrodeelearning.com/validator/nXd7S7gU8g',
+  },
+];
+
 const PROFESSIONAL_PROJECTS = [
   {
-    title: 'Reconocimiento Facial LFW',
-    description: 'MLP vs CNN sobre dataset Labeled Faces in the Wild. Data augmentation, matriz de confusión.',
+    title: "Monitor de Recuento de Carnes (McDonald's)",
+    description:
+      'Conteo automatizado de productos a partir de los pedidos del POS, con lectura de puertos USB.',
+    tech: ['ElectronJS', 'Node.js', 'JSON', 'XML'],
+    context: 'FK Tech SRL',
+  },
+  {
+    title: "Monitor de Pedidos de Delivery (McDonald's)",
+    description:
+      'Monitor en tiempo real de pedidos de delivery, con integración a dispositivos externos del local.',
+    tech: ['ElectronJS', 'Node.js', 'DLL/COM'],
+    context: 'FK Tech SRL',
+  },
+  {
+    title: 'Foreign Entry Order',
+    description:
+      'Interfaz de carga de ventas externas sobre el sistema POS del local.',
+    tech: ['C#', 'Windows Forms'],
+    context: 'FK Tech SRL',
+  },
+  {
+    title: 'Reconocimiento Facial LFW: MLP vs CNN',
+    description:
+      'Implementación y comparación de MLP contra CNN sobre el dataset Labeled Faces in the Wild, con data augmentation y matriz de confusión.',
     tech: ['Python', 'TensorFlow', 'Keras', 'NumPy', 'Pandas'],
     context: 'Deep Learning — UTN / UBA',
   },
   {
     title: 'OpenCV — Visión por Computadora',
-    description: 'Clasificación de imágenes con CNN y aprendizaje automático.',
-    tech: ['Python', 'OpenCV'],
+    description:
+      'Reconocimiento y clasificación de imágenes con redes neuronales convolucionales.',
+    tech: ['Python', 'OpenCV', 'CNN'],
     context: 'UTN FRC',
-  },
-  {
-    title: "Monitor de Carnes (McDonald's)",
-    description: 'Conteo de productos desde POS mediante lectura de puertos USB.',
-    tech: ['ElectronJS', 'Node.js', 'JSON', 'XML'],
-    context: 'FK TECH SRL',
-  },
-  {
-    title: "Monitor de Pedidos Delivery (McDonald's)",
-    description: 'Gestión de pedidos delivery con integración a dispositivos externos.',
-    tech: ['ElectronJS', 'Node.js', 'DLL/COM'],
-    context: 'FK TECH SRL',
-  },
-  {
-    title: 'Foreign Entry Order',
-    description: 'Windows Forms para emular ventas externas en sistema POS.',
-    tech: ['C#', 'Windows Forms'],
-    context: 'FK TECH SRL',
   },
 ];
 
@@ -295,10 +367,11 @@ function MyComputer({ onClose }) {
                   <div className="com__content__right__card__header">Files Stored on This Computer</div>
                   <div className="com__content__right__card__content">
                     {[
-                      { label: 'Educación', v: VIEWS.EDUCATION },
+                      { label: 'IA / Machine Learning', v: VIEWS.AI },
                       { label: 'Experiencia', v: VIEWS.EXPERIENCE },
                       { label: 'Proyectos', v: VIEWS.PROJECTS },
                       { label: 'Stack Técnico', v: VIEWS.STACK },
+                      { label: 'Educación', v: VIEWS.EDUCATION },
                     ].map(({ label, v }) => (
                       <div
                         key={v}
@@ -335,17 +408,30 @@ function MyComputer({ onClose }) {
             {/* EDUCATION VIEW */}
             {view === VIEWS.EDUCATION && (
               <FolderView>
-                <FolderViewTitle>Educación</FolderViewTitle>
+                <FolderViewTitle>Educación y Certificaciones</FolderViewTitle>
                 <EduCard>
-                  <EduYear>2016 — Actualidad</EduYear>
-                  <EduDegree>Ingeniería Electrónica</EduDegree>
-                  <EduSchool>Universidad Tecnológica Nacional — Córdoba</EduSchool>
+                  <EduYear>En curso</EduYear>
+                  <EduDegree>Ingeniería Electrónica (estudiante avanzado)</EduDegree>
+                  <EduSchool>Universidad Tecnológica Nacional — FRC, Córdoba</EduSchool>
+                  <EduNote>Formación orientada a visión por computadora y deep learning.</EduNote>
                 </EduCard>
                 <EduCard>
                   <EduYear>2010 — 2015</EduYear>
                   <EduDegree>Bachiller en Economía y Gestión</EduDegree>
                   <EduSchool>Inst. Sec. Dr. Raúl Loza Luque — Luque, Córdoba</EduSchool>
                 </EduCard>
+                <ProjectSectionLabel style={{ marginTop: 16 }}>
+                  Certificaciones
+                </ProjectSectionLabel>
+                {CERTIFICATIONS.map((cert, i) => (
+                  <EduCard key={i}>
+                    <EduDegree>{cert.name}</EduDegree>
+                    <EduSchool>{cert.school}</EduSchool>
+                    <ProjectLink href={cert.url} target="_blank" rel="noreferrer">
+                      Ver certificado
+                    </ProjectLink>
+                  </EduCard>
+                ))}
               </FolderView>
             )}
 
@@ -356,25 +442,25 @@ function MyComputer({ onClose }) {
                 {[
                   {
                     company: 'Leistung Ingeniería SRL',
-                    period: 'Sept 2024 — Actualidad',
-                    role: 'Freelance Full Stack Developer',
+                    period: 'Sept 2024 — Presente',
+                    role: 'Full Stack Developer (Freelance)',
                     location: 'Córdoba, Argentina',
                     items: [
-                      'Desarrollo web con Angular, TypeScript y C#',
-                      'Implementación de diseños basados en Figma',
-                      'Gestión de proyectos con Jira',
+                      'Aplicación web de gestión empresarial: Angular + TypeScript en el frontend, C# / .NET en el backend',
+                      'Traducción de diseños Figma a interfaz final',
+                      'Coordinación directa con el cliente vía Jira',
                     ],
                   },
                   {
-                    company: 'FK TECH SRL',
+                    company: "FK Tech SRL — Cliente: McDonald's Corporation",
                     period: 'Mar 2022 — Sept 2024',
                     role: 'Software Engineer',
                     location: 'Córdoba, Argentina',
                     items: [
-                      'Backend para sistemas POS (Point Of Sales)',
-                      'APIs en múltiples lenguajes y plataformas',
-                      'JavaScript, C, ElectronJS, Node.js, React, CSS',
-                      'Herramientas Atlassian: Jira y Confluence',
+                      "Apps de escritorio y servicios para los sistemas POS desplegados en locales de McDonald's, con ElectronJS, Node.js, React y C",
+                      'Integración con hardware del local (USB, DLLs nativas, comunicación COM) y construcción de APIs REST',
+                      'Apps productivas: conteo automatizado de productos, monitor de delivery en tiempo real e interfaz de carga de ventas externas',
+                      'Documentación técnica en Confluence y seguimiento de sprints en Jira',
                     ],
                   },
                   {
@@ -383,7 +469,7 @@ function MyComputer({ onClose }) {
                     role: 'Diseño y Carpintería',
                     location: 'Luque, Córdoba',
                     items: [
-                      'Diseño de muebles con CAD Fusion 360',
+                      'Diseño de muebles con software CAD Fusion 360',
                       'Operación de máquinas CNC',
                     ],
                   },
@@ -442,26 +528,105 @@ function MyComputer({ onClose }) {
               </FolderView>
             )}
 
+            {/* AI VIEW */}
+            {view === VIEWS.AI && (
+              <FolderView>
+                <FolderViewTitle>IA / Machine Learning</FolderViewTitle>
+                {AI_PROJECTS.map((p, i) => (
+                  <AiCard key={i}>
+                    <AiTitle>{p.title}</AiTitle>
+                    <AiContext>{p.context}</AiContext>
+                    <AiMetric>{p.metric}</AiMetric>
+                    <AiDesc>{p.description}</AiDesc>
+                    <TechRow>
+                      {p.tech.map(t => <TechTag key={t}>{t}</TechTag>)}
+                    </TechRow>
+                    <AiLinks>
+                      {p.links.map(link => (
+                        <ProjectLink
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {link.label}
+                        </ProjectLink>
+                      ))}
+                    </AiLinks>
+                  </AiCard>
+                ))}
+              </FolderView>
+            )}
+
             {/* STACK VIEW */}
             {view === VIEWS.STACK && (
               <FolderView>
                 <FolderViewTitle>Stack Técnico</FolderViewTitle>
                 {[
                   {
+                    category: 'IA & GenAI',
+                    items: [
+                      'Fine-tuning LoRA / PEFT',
+                      'RAG',
+                      'LangChain (LCEL)',
+                      'LangServe',
+                      'Hugging Face',
+                      'OpenAI API',
+                      'ChromaDB',
+                      'Prompt engineering',
+                      'Evaluación de LLMs',
+                    ],
+                  },
+                  {
+                    category: 'ML / Deep Learning',
+                    items: [
+                      'PyTorch',
+                      'TensorFlow',
+                      'Keras',
+                      'Scikit-learn',
+                      'XGBoost',
+                      'CNN',
+                      'Transfer learning',
+                      'Visión por computadora',
+                      'CLIP',
+                    ],
+                  },
+                  {
                     category: 'Frontend',
-                    items: ['JavaScript', 'React', 'Angular', 'TypeScript', 'CSS'],
+                    items: [
+                      'Angular',
+                      'React',
+                      'TypeScript',
+                      'JavaScript',
+                      'HTML5',
+                      'CSS3',
+                      'Figma',
+                    ],
                   },
                   {
-                    category: 'Backend',
-                    items: ['Node.js', 'C#', 'C / C++', 'ElectronJS', 'Python'],
+                    category: 'Backend & APIs',
+                    items: [
+                      'Node.js',
+                      'C# / .NET',
+                      'FastAPI',
+                      'ElectronJS',
+                      'REST APIs',
+                      'SQL',
+                      'C',
+                    ],
                   },
                   {
-                    category: 'AI / Machine Learning',
-                    items: ['TensorFlow', 'Keras', 'OpenCV', 'NumPy', 'Pandas', 'Matplotlib'],
-                  },
-                  {
-                    category: 'Tools & Platforms',
-                    items: ['Jira', 'Confluence', 'Figma', 'Git', 'POSTMAN'],
+                    category: 'DevOps & Datos',
+                    items: [
+                      'Docker',
+                      'CI/CD (GitHub Actions)',
+                      'Git',
+                      'Railway',
+                      'Hugging Face Spaces',
+                      'Pandas',
+                      'NumPy',
+                      'Jira',
+                    ],
                   },
                 ].map((section, i) => (
                   <StackSection key={i}>
@@ -498,6 +663,54 @@ const FolderViewTitle = styled.div`
   border-bottom: 2px solid #70bfff;
 `;
 
+/* ─── IA / Machine Learning ─── */
+const AiCard = styled.div`
+  background: #f5f8ff;
+  border: 1px solid #c0d0f8;
+  border-left: 3px solid #1a5cd8;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+`;
+
+const AiTitle = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: #0c327d;
+`;
+
+const AiContext = styled.div`
+  font-size: 9px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 5px;
+`;
+
+const AiMetric = styled.div`
+  display: inline-block;
+  background: #dce8ff;
+  border: 1px solid #a0b8f0;
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0c327d;
+  margin-bottom: 6px;
+`;
+
+const AiDesc = styled.div`
+  font-size: 10px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 6px;
+`;
+
+const AiLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+
 /* ─── Education ─── */
 const EduCard = styled.div`
   background: #f5f8ff;
@@ -520,6 +733,13 @@ const EduDegree = styled.div`
 const EduSchool = styled.div`
   font-size: 11px;
   color: #333;
+`;
+
+const EduNote = styled.div`
+  font-size: 10px;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 4px;
 `;
 
 /* ─── Experience ─── */

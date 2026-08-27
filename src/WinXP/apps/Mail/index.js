@@ -28,22 +28,38 @@ const FOLDERS = [
 ];
 
 const WELCOME_MSG = {
-  from: 'Matias Marro <m.m.caseros.386@gmail.com>',
-  subject: '👋 Bienvenido a mi portfolio',
-  date: 'Apr 14, 2026',
+  from: 'Matías Marro <m.m.caseros.386@gmail.com>',
+  subject: 'Bienvenido a mi portfolio',
+  date: 'Aug 27, 2026',
   body:
 `Hola! Gracias por visitar mi portfolio.
 
-Soy Matias Marro, desarrollador Full Stack con experiencia en
-React, Angular, TypeScript, Node.js, C# y más.
+Soy Matías Marro, AI Engineer y Full Stack Developer.
+Trabajo con LLMs (RAG, fine-tuning con LoRA), PyTorch y
+FastAPI, con más de 4 años construyendo software en
+producción con Angular, React, Node.js y C# / .NET.
+
+Mi diferencial es cerrar todo el ciclo: entreno o integro
+un modelo, lo despliego como API y lo conecto a una
+aplicación real que la gente usa.
+
+Dos proyectos que podés ver funcionando ahora mismo:
+
+  > Fine-tuning LoRA para salida estructurada
+    (precisión de formato: 0% -> 87%)
+    huggingface.co/spaces/MatiasMarro/nimbus-lora-format-tuning
+
+  > Chatbot RAG en producción sobre documentación
+    corporativa, con FastAPI + LangServe y streaming
+    promtior-rag-challenge-production.up.railway.app
 
 Usá el botón "New Message" para escribirme directamente.
 Podés editar el asunto y el mensaje como quieras.
 
-También podés explorar mis proyectos en la carpeta
-"My Computer" desde el escritorio.
+El resto está en la carpeta "My Computer" del escritorio,
+empezando por "IA / Machine Learning".
 
-— Matias`,
+— Matías`,
 };
 
 const VIEWS = { INBOX: 'inbox', COMPOSE: 'compose' };
